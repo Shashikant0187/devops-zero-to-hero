@@ -1,0 +1,98 @@
+# Linux File Permission Commands (DevOps Notes)
+
+## 1. View Permissions
+
+ls -l
+
+---
+
+## 2. Symbolic Mode (Easy Way)
+
+### Add Permission
+
+chmod +x file.txt        # add execute
+chmod +w file.txt        # add write
+chmod +r file.txt        # add read
+
+### Remove Permission
+
+chmod -x file.txt        # remove execute
+chmod -w file.txt        # remove write
+chmod -r file.txt        # remove read
+
+### Set Specific Permission
+
+chmod u+x file.txt       # user
+chmod g+w file.txt       # group
+chmod o+r file.txt       # others
+
+---
+
+## 3. Numeric Mode (Important)
+
+Permission Values:
+r = 4
+w = 2
+x = 1
+
+### Common Commands
+
+chmod 777 file.txt       # rwxrwxrwx (full access - NOT SAFE)
+chmod 755 file.txt       # rwxr-xr-x (scripts)
+chmod 644 file.txt       # rw-r--r-- (normal files)
+chmod 600 file.txt       # rw------- (private file)
+chmod 400 key.pem        # r-------- (secure key)
+
+---
+
+## 4. Change Permissions for Directory
+
+chmod 755 folder/
+chmod -R 755 folder/     # recursive (all files inside)
+
+---
+
+## 5. Change Ownership
+
+chown user file.txt
+chown user:group file.txt
+
+Example:
+chown shashi file.txt
+chown shashi:shashi file.txt
+
+---
+
+## 6. Special Notes
+
+* 777 → dangerous (avoid in production)
+* 755 → best for scripts
+* 644 → best for normal files
+* 400 → best for SSH keys
+
+---
+
+## 7. Quick Reference
+
+Number   Meaning
+7        rwx
+6        rw-
+5        r-x
+4        r--
+
+---
+
+## 8. Real DevOps Use Cases
+
+SSH Key:
+chmod 400 devops-key.pem
+
+Script:
+chmod 755 deploy.sh
+
+Secure File:
+chmod 600 secrets.txt
+
+---
+
+END
